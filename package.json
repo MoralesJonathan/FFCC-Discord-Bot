@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/MoralesJonathan/FFCC-Discord-Bot/issues"
   },
-  "homepage": "https://github.com/MoralesJonathan/FFCC-Discord-Bot#readme"
+  "homepage": "https://github.com/MoralesJonathan/FFCC-Discord-Bot#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
 }
