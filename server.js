@@ -44,16 +44,20 @@ client.on('message', msg => {
     const { channel, content, author: {username}, system} = msg;
     if (system === false && channel.name === 'stand-in-line') {
         switch(content){
-            case '!viewqueue': 
+            case '!viewqueue':
+            case '!view':
                 printQueue(msg);
                 break;
             case '!addtoqueue':
+            case '!add':
                 addToQueue(msg, username);
                 break;
-            case '!removefromqueue': 
+            case '!removefromqueue':
+            case '!remove':
                 removeFromQueue(msg, username);
                 break;
             case '!clearqueue':
+            case '!clear':
                 clearQueue(msg);
                 break;
         }
