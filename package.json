@@ -1,0 +1,20 @@
+{
+  "name": "ffcc-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for the FreakFam Club Collective (FFCC)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoralesJonathan/FFCC-Discord-Bot.git"
+  },
+  "keywords": [],
+  "author": "Jonathan Morales (moralesjonathan@email.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MoralesJonathan/FFCC-Discord-Bot/issues"
+  },
+  "homepage": "https://github.com/MoralesJonathan/FFCC-Discord-Bot#readme"
+}
