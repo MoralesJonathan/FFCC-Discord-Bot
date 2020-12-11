@@ -1,6 +1,5 @@
 require('dotenv').config();
 const Discord = require('discord.js');
-const http = require("http");
 const client = new Discord.Client();
 const queue = [];
 
@@ -66,8 +65,3 @@ client.on('message', msg => {
 });
 
 client.login(process.env.BOT_TOKEN);
-const server = http.createServer((req,res)=>{res.end()});
-server.listen(process.env.PORT, function() {
-    console.log(`Server listening on port: ${process.env.PORT}`);
-  });
-  

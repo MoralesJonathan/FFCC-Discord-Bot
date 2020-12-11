@@ -1,5 +1,0 @@
-{
-    "appService.showBuildDuringDeployPrompt": false,
-    "appService.defaultWebAppToDeploy": "/subscriptions/1a2a17a7-8feb-43c6-9d1a-21f3124f9aec/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/freakfamdiscord",
-    "appService.deploySubpath": "."
-}
