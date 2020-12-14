@@ -87,6 +87,15 @@ const clearQueue = msg => {
         msg.channel.send(`the queue has been cleared!`);
     }
 }
+
+const showCommands = msg => {
+        msg.reply(`The available commands are:
+        \`!view\` - Lists the current queue.
+        \`!add\` - Add yourself to the queue.
+        \`!remove\` - Remove yourself from the queue.
+        \`!clear\` - Clears the queue entirely. (Admins only!)
+        \`!commands\` - Display this message again!`);
+}
 client.on('message', msg => {
     const { channel, content, author: {username}, system} = msg;
     if (system === false && channel.name === 'stand-in-line') {
@@ -106,6 +115,9 @@ client.on('message', msg => {
             case '!clearqueue':
             case '!clear':
                 clearQueue(msg);
+                break;
+            case '!commands':
+                showCommands(msg);
                 break;
         }
     }
