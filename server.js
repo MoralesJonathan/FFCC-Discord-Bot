@@ -1,17 +1,38 @@
 require('dotenv').config();
 const Discord = require('discord.js');
 const fs = require('fs');
+const {createLogger, format, transports} = require('winston');
 const client = new Discord.Client();
+const environment = process.env.NODE_ENV;
+const logger = createLogger({
+    format: format.combine(
+        format.timestamp(),
+        format.prettyPrint()
+    ),
+    transports: [
+        new transports.File({ filename: 'errors.log', level: 'error' }),
+        new transports.File({ filename: 'combined.log', level: 'info'}),
+        new transports.Console()
+    ],
+    exceptionHandlers: [
+        new transports.File({ filename: 'exceptions.log' })
+    ],
+    rejectionHandlers: [
+        new transports.File({ filename: 'rejections.log' })
+    ],
+    exitOnError: false
+});
+
 let queue;
 
 const initQueueFile = () => {
     fs.writeFile('queue.txt', "[]", { flag: 'wx' }, err => {
-        if (err) console.log(err);
+        if (err) logger.error(err);
     });
 
     fs.readFile('queue.txt', 'utf8', (err, data) => {
         if (err) {
-            console.error(err)
+            logger.error(err)
             queue = []
             return
         }
@@ -20,12 +41,12 @@ const initQueueFile = () => {
 }
 
 client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
+    logger.info(`Logged in as ${client.user.tag}!`);
 });
 
 const updateQueueFile = queueArr => {
     fs.writeFile('queue.txt', JSON.stringify(queueArr), err => {
-        if (err) return console.log(`Error writing to file: ${err}`);
+        if (err) return logger.error(`Error writing to file: ${err}`);
     });
 }
 
@@ -62,6 +83,7 @@ const clearQueue = msg => {
     if(msg.member.hasPermission('ADMINISTRATOR')){
         queue.length = 0;
         updateQueueFile(queue);
+        logger.info('Queue was cleared.')
         msg.channel.send(`the queue has been cleared!`);
     }
 }
@@ -89,6 +111,6 @@ client.on('message', msg => {
     }
 });
 
-client.login(process.env.BOT_TOKEN);
+client.login(environment === 'local' ? process.env.DEV_BOT_TOKEN : process.env.BOT_TOKEN);
 
 initQueueFile()
