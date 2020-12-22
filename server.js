@@ -51,6 +51,7 @@ const updateQueueFile = queueArr => {
 }
 
 const printQueue = msg => {
+    logger.info('Printing queue');
     if(queue.length === 0){
         msg.channel.send('The current queue is empty.');
     } else {
@@ -59,6 +60,7 @@ const printQueue = msg => {
 }
 
 const addToQueue = (msg, username) => {
+    logger.info(`${username} requested to be added to the queue`);
     if(queue.includes(username)){
         msg.reply(`You're already in the queue!`);
     } else {
@@ -69,6 +71,7 @@ const addToQueue = (msg, username) => {
 }
 
 const removeFromQueue = (msg, username) => {
+    logger.info(`${username} requested to be removed from the queue`);
     if (!queue.includes(username)) {
         msg.reply(`You're not in the queue.`);
     } else {
@@ -83,12 +86,13 @@ const clearQueue = msg => {
     if(msg.member.hasPermission('ADMINISTRATOR')){
         queue.length = 0;
         updateQueueFile(queue);
-        logger.info('Queue was cleared.')
+        logger.info('the queue has been cleared!');
         msg.channel.send(`the queue has been cleared!`);
     }
 }
 
 const showCommands = msg => {
+    logger.info('Commands displayed');
         msg.reply(`The available commands are:
         \`!view\` - Lists the current queue.
         \`!add\` - Add yourself to the queue.
